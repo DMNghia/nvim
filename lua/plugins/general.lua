@@ -14,12 +14,13 @@ return {
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.ui.alpha" },
+  { import = "lazyvim.plugins.extras.editor.inc-rename" },
 
   -- Configure LazyVim to load theme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "nvchad",
     },
   },
 
@@ -72,11 +73,21 @@ return {
   },
 
   -- the opts function can also be used to change the default opts:
+  -- disable some plugins to use ui of nvchad
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, "😄")
-    end,
+    enabled = false,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = false,
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    enabled = false,
+  },
+  {
+    "RRethy/vim-illuminate",
+    enabled = false,
   },
 }
