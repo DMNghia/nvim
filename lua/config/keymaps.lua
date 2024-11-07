@@ -15,6 +15,13 @@ map("i", "<A-l>", "<ESC>$a", { desc = "Go to end of line" })
 map({ "n", "i" }, "<C-d>", "<ESC>yyp", { desc = "Copy to new line" })
 map({ "n", "i" }, "<C-z>", "<ESC>u", { desc = "Undo" })
 map({ "n", "i" }, "<C-y>", "<ESC>dd", { desc = "Delete line" })
+
+-- Copy and paste
+map("n", "<C-S-v>", '"+p', { desc = "Paste from clipboard" })
+map("i", "<C-S-v>", '<ESC>"+pa', { desc = "Paste from clipboard" })
+map("v", "<C-S-c>", '"+y', { desc = "Copy to clipboard" })
+
+-- Nvchad keymaps
 map("n", "<leader>ut", function()
   require("nvchad.themes").open()
 end, { desc = "Choose themes" })

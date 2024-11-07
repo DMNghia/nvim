@@ -13,8 +13,10 @@ return {
   { import = "lazyvim.plugins.extras.lang.clangd" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.ui.alpha" },
+  { import = "lazyvim.plugins.extras.editor.mini-files" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
+  { import = "lazyvim.plugins.extras.util.startuptime" },
+  { import = "lazyvim.plugins.extras.util.project" },
 
   -- Configure LazyVim to load theme
   {
@@ -25,29 +27,29 @@ return {
   },
 
   -- Config alpha
-  {
-    "goolord/alpha-nvim",
-    event = "VimEnter",
-    enabled = true,
-    init = false,
-    opts = function()
-      local dashboard = require("alpha.themes.dashboard")
-      local logo = [[
-         ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆
-          ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦
-                ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄
-                 ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀ ⠢⣀⡀⠈⠙⠿⠄
-                ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀
-         ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄
-        ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄
-       ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄
-       ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄
-            ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆
-             ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃
-    ]]
-      dashboard.section.header.val = vim.split(logo, "\n")
-    end,
-  },
+  -- {
+  --   "goolord/alpha-nvim",
+  --   event = "VimEnter",
+  --   enabled = true,
+  --   init = false,
+  --   opts = function()
+  --     local dashboard = require("alpha.themes.dashboard")
+  --     local logo = [[
+  --        ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆
+  --         ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦
+  --               ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄
+  --                ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀ ⠢⣀⡀⠈⠙⠿⠄
+  --               ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀
+  --        ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄
+  --       ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄
+  --      ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄
+  --      ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄
+  --           ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆
+  --            ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃
+  --   ]]
+  --     dashboard.section.header.val = vim.split(logo, "\n")
+  --   end,
+  -- },
 
   -- add more treesitter parsers
   {
@@ -89,5 +91,18 @@ return {
   {
     "RRethy/vim-illuminate",
     enabled = false,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      document_highlight = { enabled = false },
+    },
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    opts = {
+      manual_mode = true,
+      patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "=src" },
+    },
   },
 }

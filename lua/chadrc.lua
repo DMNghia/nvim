@@ -1,7 +1,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "oxocarbon",
+  theme = "onedark",
   integrations = { "dap", "trouble" },
 }
 
