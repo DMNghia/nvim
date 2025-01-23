@@ -9,6 +9,6 @@ for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
 end
 
 -- Add nvchad cmp
-local options = {}
-options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
-require("cmp").setup(options)
+-- local options = {}
+-- options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
+-- require("cmp").setup(options)

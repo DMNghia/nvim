@@ -6,11 +6,11 @@ M.base46 = {
 }
 
 M.ui = {
-  cmp = {
-    icons_left = true,
-    lspkind_text = true,
-    style = "flat_dark",
-  },
+  -- cmp = {
+  --   icons_left = true,
+  --   lspkind_text = true,
+  --   style = "flat_dark",
+  -- },
   statusline = {
     theme = "default",
     separator_style = "round",

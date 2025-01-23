@@ -99,4 +99,10 @@ return {
       document_highlight = { enabled = false },
     },
   },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      preset = "classic",
+    },
+  },
 }
